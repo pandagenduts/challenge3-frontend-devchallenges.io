@@ -11,36 +11,38 @@ const Header = () => {
 
   const handlerShowPopupMenu = () => {
     dispatch(UIActions.togglePopupMenu());
-  }
+  };
 
   return (
-    <header className="flex justify-between font-mulish">
+    <header className="flex justify-between sm:items-center font-mulish pt-[22px] pb-[37px] sm:pt-8 sm:pb-[67px] gap-9 flex-col sm:flex-row">
       <div>
         <img src={logo} alt="windbnb-logo" />
       </div>
-      <div className="flex max-w-[297px] flex-1">
-        <div>
+      <div className="flex  self-center max-w-[297px] flex-1 rounded-2xl shadow-bsOne">
+        <div className="py-[19px] px-4 flex">
           <Input
             readOnly
             placeholder="Add Location"
-            className="w-full cursor-pointer bg-slate-300"
+            className="w-full text-sm cursor-pointer"
             actionOnClick={handlerShowPopupMenu}
           />
         </div>
-        <div>
+        <div className="py-[19px] px-4 flex border-x-[1px] border-solid border-[#F2F2F2]">
           <Input
             readOnly
             placeholder="Add Guest"
-            className="w-full cursor-pointer"
+            className="w-full text-sm cursor-pointer"
             actionOnClick={handlerShowPopupMenu}
           />
         </div>
-        <span
-          className="cursor-pointer material-symbols-outlined"
-          onClick={handlerShowPopupMenu}
-        >
-          search
-        </span>
+        <div className="py-[19px] px-4 flex text-[#EB5757]">
+          <span
+            className="cursor-pointer material-symbols-outlined"
+            onClick={handlerShowPopupMenu}
+          >
+            search
+          </span>
+        </div>
       </div>
       {showPopupMenu && <PopupMenu />}
     </header>
