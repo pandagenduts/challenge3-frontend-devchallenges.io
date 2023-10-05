@@ -4,6 +4,28 @@ const Main = () => {
   return (
     <main>
       <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
+      <h1>main</h1>
     </main>
   )
 }

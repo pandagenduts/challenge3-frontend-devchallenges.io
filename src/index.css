@@ -16,6 +16,10 @@
   margin: 0 auto;
 }
 
+body {
+  background-color: lightgray;
+}
+
 @media (max-width: 1260px) {
   #root {
     padding: 0 12px;
