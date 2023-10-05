@@ -19,17 +19,17 @@ const Header = () => {
         <div>
           <Input
             actionOnClick={handlerShowMenu}
-            type="text"
             readOnly
+            placeholder="Add Location"
             className="w-full bg-slate-300 cursor-pointer"
           />
         </div>
         <div>
           <Input
             actionOnClick={handlerShowMenu}
-            type="text"
             readOnly
-            className="w-full bg-slate-400 cursor-pointer"
+            placeholder="Add Guest"
+            className="w-full cursor-pointer"
           />
         </div>
         <span
@@ -46,14 +46,17 @@ const Header = () => {
             className="fixed top-0 left-0 w-screen h-screen backdrop-blur-[2px] z-10"
             onClick={handlerShowMenu}
           />
-          <nav className="z-20 bg-slate-500">
-            <div className="flex">
-              <div>
-                <label htmlFor="location"></label>
-                <input type="text" />
+          <nav className="z-20 bg-white">
+            <div className="flex flex-col sm:flex-row shadow-bsOne rounded-[16px] py-[11px] px-[26px]">
+              <div className="flex flex-col">
+                <label htmlFor="location">LOCATION</label>
+                <Input type="text" placeholder="Add Location" name='location' />
               </div>
-              <div></div>
-              <Button>Search</Button>
+              <div className="flex flex-col">
+                <label htmlFor="guest">GUESTS</label>
+                <Input type="text" placeholder="Add guest" name='guests' />
+              </div>
+              <Button className='hidden sm:inline-block'>Search</Button>
             </div>
             <div className="grid"></div>
           </nav>
