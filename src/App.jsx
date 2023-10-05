@@ -1,7 +1,13 @@
+import Main from "./components/Main"
+import Footer from "./components/layouts/Footer/Footer"
+import Header from "./components/layouts/Header/Header"
+
 const App = () => {
   return (
     <>
-      <h1>hello world!</h1>
+      <Header />
+      <Main />
+      <Footer />
     </>
   )
 }
