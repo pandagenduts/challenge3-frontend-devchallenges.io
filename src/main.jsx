@@ -8,7 +8,5 @@ import store from "./store/index.js";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <App />
-
   </Provider>
-
 );
