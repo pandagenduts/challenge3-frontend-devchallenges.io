@@ -1,4 +1,4 @@
-import { useState } from "react";
+import ReactDOM, { useState } from "react";
 import logo from "../../../assets/logo.png";
 
 const Header = () => {
@@ -15,20 +15,36 @@ const Header = () => {
       </div>
       <div className="flex max-w-[297px] flex-1">
         <div>
-          <input className="w-full bg-slate-300" type="text" readOnly />
+          <input
+            className="w-full bg-slate-300 cursor-pointer"
+            type="text"
+            readOnly
+            onClick={handlerShowMenu}
+          />
         </div>
         <div>
-          <input className="w-full bg-slate-400" type="text" readOnly />
+          <input
+            className="w-full bg-slate-400 cursor-pointer"
+            type="text"
+            readOnly
+            onClick={handlerShowMenu}
+          />
         </div>
-        <span class="material-symbols-outlined">search</span>
+        <span
+          className="material-symbols-outlined cursor-pointer"
+          onClick={handlerShowMenu}
+        >
+          search
+        </span>
       </div>
       {showMenu && (
-        <menu className="bg-slate-500 fixed top-0 left-0 w-screen h-screen px-3 py-[18px]">
+        <menu className="fixed top-0 left-0 w-screen h-screen px-3 py-[18px] flex flex-col">
           <div
             id="menu-overlay"
-            className="fixed top-0 left-0 w-screen h-screen bg-white bg-opacity-80 z-10"
-          ></div>
-          <nav className="z-20">
+            className="fixed top-0 left-0 w-screen h-screen backdrop-blur-[2px] z-10"
+            onClick={handlerShowMenu}
+          />
+          <nav className="z-20 bg-slate-500">
             <div>navigation here</div>
             <div className="grid"></div>
           </nav>
