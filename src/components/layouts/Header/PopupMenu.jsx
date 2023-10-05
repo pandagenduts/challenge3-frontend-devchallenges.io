@@ -2,6 +2,7 @@ import Input from "../Input";
 import Button from "../Button";
 import { useDispatch } from "react-redux";
 import { UIActions } from "../../../store/ui-slice";
+import { useState } from "react";
 
 const PopupMenu = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const PopupMenu = () => {
   const handlerFormSubmit = (event) => {
     event.preventDefault();
   };
+
+  const [selectedFilter, setSelectedFilter] = useState('location');
 
   return (
     <menu className="fixed top-0 left-0 flex flex-col w-screen h-screen">
@@ -40,18 +43,20 @@ const PopupMenu = () => {
           </div>
           <nav className="">
             <div className="grid grid-cols-1 sm:grid-cols-3 shadow-bsOne rounded-[16px]">
-              <div className="flex flex-col gap-1 justify-center py-[11px] px-[26px] rounded-2xl outline outline-1 outline-[#333]">
+              <div className="flex flex-col gap-1 justify-center py-[11px] px-[26px] rounded-2xl border border-solid border-[#333]">
                 <label htmlFor="location">LOCATION</label>
                 <Input type="text" placeholder="Add Location" name="location" />
               </div>
-              <div className="flex flex-col gap-1 justify-center py-[11px] px-[26px] border-t-[1px] sm:border-solid sm:border-x-[1px] border-[#F2F2F2]">
-                <label htmlFor="guest">GUESTS</label>
-                <Input
-                  type="number"
-                  placeholder="Add guest"
-                  name="guests"
-                  readOnly
-                />
+              <div className="border-t-[1px] sm:border-solid sm:border-x-[1px] border-[#F2F2F2]">
+                <div className="flex flex-col gap-1 justify-center py-[11px] px-[26px] rounded-2xl border border-solid border-transparent border-[#333]">
+                  <label htmlFor="guest">GUESTS</label>
+                  <Input
+                    type="number"
+                    placeholder="Add guest"
+                    name="guests"
+                    readOnly
+                  />
+                </div>
               </div>
               <div className="hidden sm:flex py-[11px] px-[26px]">
                 <Button>Search</Button>
