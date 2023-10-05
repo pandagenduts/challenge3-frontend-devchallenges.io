@@ -10,7 +10,7 @@ const Input = (props) => {
       id={name}
       placeholder={placeholder ? placeholder : ''}
       readOnly={readOnly ? readOnly : false}
-      className={className}
+      className={`outline-none ${className}`}
       onClick={actionOnClick}
     />
   );
