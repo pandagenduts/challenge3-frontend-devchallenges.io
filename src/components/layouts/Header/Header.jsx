@@ -1,5 +1,7 @@
 import ReactDOM, { useState } from "react";
 import logo from "../../../assets/logo.png";
+import Button from "../Button";
+import Input from "../Input";
 
 const Header = () => {
   const [showMenu, setShowMenu] = useState(true);
@@ -15,19 +17,19 @@ const Header = () => {
       </div>
       <div className="flex max-w-[297px] flex-1">
         <div>
-          <input
-            className="w-full bg-slate-300 cursor-pointer"
+          <Input
+            actionOnClick={handlerShowMenu}
             type="text"
             readOnly
-            onClick={handlerShowMenu}
+            className="w-full bg-slate-300 cursor-pointer"
           />
         </div>
         <div>
-          <input
-            className="w-full bg-slate-400 cursor-pointer"
+          <Input
+            actionOnClick={handlerShowMenu}
             type="text"
             readOnly
-            onClick={handlerShowMenu}
+            className="w-full bg-slate-400 cursor-pointer"
           />
         </div>
         <span
@@ -45,7 +47,14 @@ const Header = () => {
             onClick={handlerShowMenu}
           />
           <nav className="z-20 bg-slate-500">
-            <div>navigation here</div>
+            <div className="flex">
+              <div>
+                <label htmlFor="location"></label>
+                <input type="text" />
+              </div>
+              <div></div>
+              <Button>Search</Button>
+            </div>
             <div className="grid"></div>
           </nav>
         </menu>
