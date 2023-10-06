@@ -81,7 +81,7 @@ const PopupMenu = () => {
                   />
                 </div>
               </div>
-              <div className="hidden sm:flex py-[11px] px-[26px]">
+              <div className="hidden sm:flex justify-center py-[11px] px-[26px]">
                 <Button>Search</Button>
               </div>
             </div>

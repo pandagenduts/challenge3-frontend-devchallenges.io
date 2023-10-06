@@ -1,5 +1,4 @@
-import logo from "../../../assets/logo.png";
-import Button from "../Button";
+import logo from "../../../assets/logo.svg";
 import Input from "../Input";
 import { useDispatch, useSelector } from "react-redux";
 import { UIActions } from "../../../store/ui-slice";
@@ -18,7 +17,7 @@ const Header = () => {
       <div>
         <img src={logo} alt="windbnb-logo" />
       </div>
-      <div className="flex  self-center max-w-[297px] flex-1 rounded-2xl shadow-bsOne">
+      <div className="flex self-center max-w-[297px] flex-1 rounded-2xl shadow-bsOne">
         <div className="py-[19px] px-4 flex">
           <Input
             readOnly
