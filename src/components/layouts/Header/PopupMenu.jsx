@@ -33,7 +33,7 @@ const PopupMenu = () => {
       />
       <form
         onSubmit={handlerFormSubmit}
-        className="z-20 px-3 pt-[18px] pb-6 sm:pt-[93px] bg-white min-h-[632px] sm:min-h-0 flex flex-col justify-between"
+        className="z-20 px-3 pt-[18px] pb-6 sm:pt-[93px] bg-white min-h-[632px] sm:min-h-[500px] flex flex-col justify-between max-w-[1280px] w-full mx-auto"
       >
         <div>
           <div
@@ -48,7 +48,7 @@ const PopupMenu = () => {
               close
             </span>
           </div>
-          <nav>
+          <nav className="">
             <div className="grid grid-cols-1 sm:grid-cols-3 shadow-bsOne rounded-[16px]">
               <div
                 className={`flex flex-col gap-1 justify-center py-[11px] px-[26px] rounded-2xl border border-solid duration-150 ${
