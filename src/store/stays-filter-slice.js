@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const staysFilterInit = {
-  location: '',
+  location: 'Helsinki',
   guests: 0,
+  doTheSearch: true,
 }
 
 const staysFilterSlice = createSlice({
@@ -14,6 +15,9 @@ const staysFilterSlice = createSlice({
     },
     setGuests: (state, action) => {
 
+    },
+    setDoTheSearch: (state) => {
+      state.doTheSearch = !state.doTheSearch;
     }
   }
 })
