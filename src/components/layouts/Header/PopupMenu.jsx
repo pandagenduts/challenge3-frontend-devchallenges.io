@@ -3,6 +3,7 @@ import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { UIActions } from "../../../store/ui-slice";
 import { useState } from "react";
+import Guests from "./Guests";
 
 const PopupMenu = () => {
   const [selectedFilter, setSelectedFilter] = useState("location");
@@ -126,32 +127,8 @@ const PopupMenu = () => {
               )}
               {selectedFilter === "guests" && (
                 <div id="guests-filter" className="py-9 px-[26px] sm:col-start-2 sm:col-end-2">
-                  <div className="mb-[52px]">
-                    <p>Adults</p>
-                    <p className="text-[#BDBDBD] mb-3">Ages 13 or above</p>
-                    <div className="flex gap-[15px] items-center text-[#828282]">
-                      <button className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer">
-                        -
-                      </button>
-                      <span className="text-[#333] font-bold">0</span>
-                      <button className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer">
-                        +
-                      </button>
-                    </div>
-                  </div>
-                  <div className="mb-[52px]">
-                    <p>Children</p>
-                    <p className="text-[#BDBDBD] mb-3">Ages 2-12</p>
-                    <div className="flex gap-[15px] items-center text-[#828282]">
-                      <button className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer">
-                        -
-                      </button>
-                      <span className="text-[#333] font-bold">0</span>
-                      <button className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer">
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  <Guests title='Adults' description='Ages 13 or above' />
+                  <Guests title='Children' description='Ages 2-12' />
                 </div>
               )}
             </div>
