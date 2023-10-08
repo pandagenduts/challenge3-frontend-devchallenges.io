@@ -2,7 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const staysFilterInit = {
   location: "Helsinki",
-  guests: 0,
+  guests: {
+    totalGuests: 0,
+    adults: 3,
+    children: 0,
+  },
   doTheSearch: true,
 };
 
@@ -13,11 +17,13 @@ const staysFilterSlice = createSlice({
     setLocation: (state, action) => {
       console.log(action);
     },
-    setGuests: (state, action) => {
+    setTotalGuests: (state, action) => {
       if (action.payload === "ADD") {
-        state.guests = state.guests + 1;
+        state.guests.totalGuests = state.guests.totalGuests + 1;
       } else if (action.payload === "DECREASE") {
-        state.guests > 0 ? (state.guests = state.guests - 1) : undefined;
+        state.guests.totalGuests > 0
+          ? (state.guests.totalGuests = state.guests.totalGuests - 1)
+          : undefined;
       }
     },
     setDoTheSearch: (state) => {

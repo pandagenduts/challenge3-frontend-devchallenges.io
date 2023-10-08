@@ -6,6 +6,10 @@ import PopupMenu from "./PopupMenu";
 
 const Header = () => {
   const { showPopupMenu } = useSelector((state) => state.theUI);
+  const { location: locationFilter, guests } = useSelector(state => state.staysFilter)
+  const {totalGuests} = guests;
+  console.log(guests);
+
   const dispatch = useDispatch();
 
   const handlerShowPopupMenu = () => {
@@ -28,8 +32,9 @@ const Header = () => {
         </div>
         <div className="py-[19px] px-4 flex border-x-[1px] border-solid border-[#F2F2F2]">
           <Input
-            readOnly
+            // readOnly
             placeholder="Add Guest"
+            // value={guestsFilter === 0 ? '' : guestsFilter}
             className="w-full text-sm cursor-pointer"
             actionOnClick={handlerShowPopupMenu}
           />

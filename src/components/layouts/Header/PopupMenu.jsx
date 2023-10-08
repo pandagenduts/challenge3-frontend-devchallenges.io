@@ -8,9 +8,6 @@ import Guests from "./Guests";
 const PopupMenu = () => {
   const [selectedFilter, setSelectedFilter] = useState("location");
   const dispatch = useDispatch();
-  const { location: locationFilter, guests: guestsFilter, doTheSearch } = useSelector(state => state.staysFilter)
-
-  console.log(guestsFilter);
 
   const handlerShowPopupMenu = () => {
     dispatch(UIActions.togglePopupMenu());
