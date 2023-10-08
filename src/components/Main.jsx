@@ -14,9 +14,9 @@ const Main = () => {
         <p className="text-[#4F4F4F] font-medium text-sm">{totalStaysShown} {totalStaysShown === 1 ? 'stay' : 'stays'}</p>
       </div>
       <div className="grid grid-cols-1 gap-8 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
-        {filteredData.map((item) => {
+        {filteredData.map((item, index) => {
           return (
-            <StayItem stayDetail={item} />
+            <StayItem key={index} stayDetail={item} />
           );
         })}
       </div>

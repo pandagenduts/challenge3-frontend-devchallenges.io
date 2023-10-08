@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { staysFilterActions } from "../../../store/stays-filter-slice";
 
 const Guests = ({ title, description }) => {
   const [guests, setGuests] = useState(0);
@@ -7,10 +8,12 @@ const Guests = ({ title, description }) => {
 
   const handleAddGuests = () => {
     setGuests((prev) => prev + 1);
+    dispatch(staysFilterActions.setGuests("ADD"));
   };
 
   const handleDecreaseGuests = () => {
     if (guests > 0) setGuests((prev) => prev - 1);
+    dispatch(staysFilterActions.setGuests("DECREASE"));
   };
 
   return (
