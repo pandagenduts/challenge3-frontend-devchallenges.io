@@ -4,10 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { UIActions } from "../../../store/ui-slice";
 import { useState } from "react";
 import Guests from "./Guests";
+import locationLists from "../../../datas/locationLists";
+import LocationListItem from "./LocationListItem";
 
 const PopupMenu = () => {
   const [selectedFilter, setSelectedFilter] = useState("location");
+  const [locationListsFiltered, setLocationListsFiltered] =
+    useState(locationLists);
   const dispatch = useDispatch();
+
+  console.log(locationLists);
 
   const handlerShowPopupMenu = () => {
     dispatch(UIActions.togglePopupMenu());
@@ -21,6 +27,7 @@ const PopupMenu = () => {
     // do the search
   };
 
+  // set which search filter to show
   const handlerLocation = () => {
     setSelectedFilter("location");
   };
@@ -96,36 +103,18 @@ const PopupMenu = () => {
                   id="location-filter"
                   className="py-9 px-[26px] text-[#4F4F4F] flex flex-col gap-9 sm:col-start-1 sm:col-end-1"
                 >
-                  <div className="flex items-center gap-[10px]">
-                    <span className="material-symbols-outlined ">
-                      location_on
-                    </span>
-                    Helsinki, Finland
-                  </div>
-                  <div className="flex items-center gap-[10px]">
-                    <span className="material-symbols-outlined text-[#4F4F4F]">
-                      location_on
-                    </span>
-                    Turku, Finland
-                  </div>
-                  <div className="flex items-center gap-[10px]">
-                    <span className="material-symbols-outlined text-[#4F4F4F]">
-                      location_on
-                    </span>
-                    Oulu, Finland
-                  </div>
-                  <div className="flex items-center gap-[10px]">
-                    <span className="material-symbols-outlined text-[#4F4F4F]">
-                      location_on
-                    </span>
-                    Vaasa, Finland
-                  </div>
+                  {locationListsFiltered.map((item, index) => (
+                    <LocationListItem location={item} key={index} />
+                  ))}
                 </div>
               )}
               {selectedFilter === "guests" && (
-                <div id="guests-filter" className="py-9 px-[26px] sm:col-start-2 sm:col-end-2">
-                  <Guests title='Adults' description='Ages 13 or above' />
-                  <Guests title='Children' description='Ages 2-12' />
+                <div
+                  id="guests-filter"
+                  className="py-9 px-[26px] sm:col-start-2 sm:col-end-2"
+                >
+                  <Guests title="Adults" description="Ages 13 or above" />
+                  <Guests title="Children" description="Ages 2-12" />
                 </div>
               )}
             </div>
