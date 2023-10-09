@@ -9,20 +9,41 @@ const Main = () => {
   const [filteredData, setFilteredData] = useState(staysData);
   let totalStaysShown = filteredData.length;
 
-  const { location: locationRedux, guests, doTheSearch } = useSelector(state => state.staysFilter)
-  const { totalGuests: totalGuestsRedux } = guests
+  const {
+    location: locationRedux,
+    guests,
+    doTheSearch,
+  } = useSelector((state) => state.staysFilter);
+  const { totalGuests: totalGuestsRedux } = guests;
 
   useEffect(() => {
     if (init) {
       init = false;
       return;
     }
-    const result = staysData.filter(item => {
+    const result = staysData.filter((item) => {
       const cityAndCountry = `${item.city}, ${item.country}`;
-      return cityAndCountry.includes(locationRedux) && totalGuestsRedux <= item.maxGuests
-    })
+      return (
+        cityAndCountry.includes(locationRedux) &&
+        totalGuestsRedux <= item.maxGuests
+      );
+    });
     setFilteredData(result);
-  }, [doTheSearch])
+  }, [doTheSearch]);
+
+  let content = filteredData.map((item, index) => {
+    return <StayItem key={index} stayDetail={item} />;
+  });
+
+  if (filteredData.length === 0) {
+    content = (
+      <p className="text-center">
+        Uh-oh, it looks like there are no stays that fit your request right now.
+        <br />
+        <br /> You can try to explore different options! :)
+      </p>
+    );
+  }
 
   return (
     <main className="text-[#333]">
@@ -33,9 +54,7 @@ const Main = () => {
         </p>
       </div>
       <div className="grid grid-cols-1 gap-8 justify-items-center sm:grid-cols-2 lg:grid-cols-3">
-        {filteredData.map((item, index) => {
-          return <StayItem key={index} stayDetail={item} />;
-        })}
+        {content}
       </div>
     </main>
   );
