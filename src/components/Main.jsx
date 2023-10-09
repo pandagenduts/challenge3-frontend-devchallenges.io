@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import staysData from "../datas/staysData";
 import StayItem from "./StayItem";
 import { useSelector } from "react-redux";
@@ -8,52 +8,16 @@ const Main = () => {
   let totalStaysShown = filteredData.length;
   if (filteredData.length > 12) totalStaysShown = "12+";
 
-  // function searchStays(query, staysData) {
-  //   const results = [];
-  //   let searchTerms = null;
-  //   if (query.includes(",")) {
-  //     searchTerms = query.trim().toLowerCase().split(",");
-  //   } else {
-  //     searchTerms = query.trim().toLowerCase().split(" ");
-  //     if(searchTerms[1]) searchTerms[1] = ` ${searchTerms[1]}`
-      
-  //   }
+  const { location: locationRedux, guests } = useSelector(state => state.staysFilter)
+  const { totalGuests: totalGuestsRedux } = guests;
 
-  //   staysData.forEach((stay) => {
-  //     const cityAndCountry = `${stay.city.toLowerCase()}, ${stay.country.toLowerCase()}`;
-
-  //     if (cityAndCountry.includes(query.toLowerCase())) {
-  //       results.push(stay);
-  //     } else {
-  //       let match = true;
-  //       searchTerms.forEach((term) => {
-  //         if (!cityAndCountry.includes(term.trim())) {
-  //           match = false;
-  //         }
-  //       });
-  //       if (match) {
-  //         results.push(stay);
-  //       }
-  //     }
-  //   });
-
-  //   return results;
-  // }
-
-  const { location: locationRedux } = useSelector(state => state.staysFilter)
-  // console.log(locationRedux);
-
-  function searchStays(query, staysData) {
-    const results = [];
-    staysData.forEach((stay) => {
-
-    });
-
-    return results;
-  }
-
-  const query = "helsinki finland";
-  const searchResults = searchStays(query, staysData);
+  useEffect(() => {
+    const result = staysData.filter(item => {
+      const cityAndCountry = `${item.city}, ${item.country}`;
+      return cityAndCountry.includes(locationRedux) && totalGuestsRedux <= item.maxGuests
+    })
+    setFilteredData(result);
+  }, [locationRedux, totalGuestsRedux])
 
   return (
     <main className="text-[#333]">

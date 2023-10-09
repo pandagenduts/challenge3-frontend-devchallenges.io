@@ -1,39 +1,41 @@
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Input from "../Input";
 import Button from "../Button";
-import { useDispatch, useSelector } from "react-redux";
-import { UIActions } from "../../../store/ui-slice";
-import { useEffect, useRef, useState } from "react";
 import Guests from "./Guests";
 import locationLists from "../../../datas/locationLists";
 import LocationListItem from "./LocationListItem";
 import { staysFilterActions } from "../../../store/stays-filter-slice";
-
-let init = true;
+import { UIActions } from "../../../store/ui-slice";
 
 const PopupMenu = () => {
   const dispatch = useDispatch();
   const locationRef = useRef();
-  const { location: locationRedux } = useSelector((state) => state.staysFilter);
+  const { location: locationRedux, guests } = useSelector(
+    (state) => state.staysFilter
+  );
+  const { totalGuests: totalGuestsRedux } = guests;
 
   // to show what search filter to show
   const [selectedFilter, setSelectedFilter] = useState("location");
   // render location based on input value
-  const [locationListsFiltered, setLocationListsFiltered] = useState(locationLists);
+  const [locationListsFiltered, setLocationListsFiltered] =
+    useState(locationLists);
   // the state for input value
   const [locationFilter, setLocationFilter] = useState("");
 
   // trigger when input value changed
   const actionOnChange = (event) => {
     setLocationFilter(event.target.value.toLowerCase().replace(",", ""));
-    if(event.target.value.trim() === '') {
-      dispatch(staysFilterActions.setLocation(''))
+    if (event.target.value.trim() === "") {
+      dispatch(staysFilterActions.setLocation(""));
     }
   };
 
   useEffect(() => {
     locationRef.current.value = locationRedux;
     setLocationFilter(locationRedux.toLowerCase().replace(",", ""));
-  }, [locationRedux])
+  }, [locationRedux]);
 
   useEffect(() => {
     setLocationListsFiltered(
@@ -46,6 +48,8 @@ const PopupMenu = () => {
   const handleShowPopupMenu = () => {
     dispatch(UIActions.togglePopupMenu());
   };
+
+  const handleBackdropClick = () => {};
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
@@ -117,9 +121,9 @@ const PopupMenu = () => {
                 >
                   <label htmlFor="guest">GUESTS</label>
                   <Input
-                    type="number"
                     placeholder="Add guest"
                     name="guests"
+                    value={totalGuestsRedux === 0 ? "" : `${totalGuestsRedux} ${totalGuestsRedux === 1 ? 'guest' : 'guests'}` }
                     readOnly
                   />
                 </div>
