@@ -9,12 +9,15 @@ const Guests = ({ title, description }) => {
   // this destructured adults or children dynamically based on title props
   const { [titleLowerCase]: numberOfGuests } = guests;
 
+  // staysFilterActions.set is dynamic based on title props
+  const setTotalGuestsAction = title === 'Adults' ? staysFilterActions.setAdults : staysFilterActions.setChildren;
+
   const handleAddGuests = () => {
-    dispatch(staysFilterActions.setTotalGuests("ADD"));
+    dispatch(setTotalGuestsAction("ADD"));
   };
 
   const handleDecreaseGuests = () => {
-    dispatch(staysFilterActions.setTotalGuests("DECREASE"));
+    dispatch(setTotalGuestsAction("DECREASE"));
   };
 
   return (

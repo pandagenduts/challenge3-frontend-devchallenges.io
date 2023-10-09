@@ -4,7 +4,7 @@ const staysFilterInit = {
   location: "Helsinki",
   guests: {
     totalGuests: 0,
-    adults: 3,
+    adults: 0,
     children: 0,
   },
   doTheSearch: true,
@@ -17,13 +17,26 @@ const staysFilterSlice = createSlice({
     setLocation: (state, action) => {
       console.log(action);
     },
-    setTotalGuests: (state, action) => {
+    setAdults: (state, action) => {
       if (action.payload === "ADD") {
+        state.guests.adults = state.guests.adults + 1;
         state.guests.totalGuests = state.guests.totalGuests + 1;
       } else if (action.payload === "DECREASE") {
-        state.guests.totalGuests > 0
-          ? (state.guests.totalGuests = state.guests.totalGuests - 1)
-          : undefined;
+        if(state.guests.adults > 0) {
+          state.guests.adults = state.guests.adults - 1;
+          state.guests.totalGuests = state.guests.totalGuests - 1;
+        }
+      }
+    },
+    setChildren: (state, action) => {
+      if (action.payload === "ADD") {
+        state.guests.children = state.guests.children + 1;
+        state.guests.totalGuests = state.guests.totalGuests + 1;
+      } else if (action.payload === "DECREASE") {
+        if(state.guests.children > 0) {
+          state.guests.children = state.guests.children - 1;
+          state.guests.totalGuests = state.guests.totalGuests - 1;
+        }
       }
     },
     setDoTheSearch: (state) => {
