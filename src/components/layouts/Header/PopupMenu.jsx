@@ -2,37 +2,61 @@ import Input from "../Input";
 import Button from "../Button";
 import { useDispatch, useSelector } from "react-redux";
 import { UIActions } from "../../../store/ui-slice";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Guests from "./Guests";
 import locationLists from "../../../datas/locationLists";
 import LocationListItem from "./LocationListItem";
+import { staysFilterActions } from "../../../store/stays-filter-slice";
+
+let init = true;
 
 const PopupMenu = () => {
-  const [selectedFilter, setSelectedFilter] = useState("location");
-  const [locationListsFiltered, setLocationListsFiltered] =
-    useState(locationLists);
   const dispatch = useDispatch();
+  const locationRef = useRef();
+  const { location: locationRedux } = useSelector((state) => state.staysFilter);
 
-  console.log(locationLists);
+  // to show what search filter to show
+  const [selectedFilter, setSelectedFilter] = useState("location");
+  // render location based on input value
+  const [locationListsFiltered, setLocationListsFiltered] = useState(locationLists);
+  // the state for input value
+  const [locationFilter, setLocationFilter] = useState("");
 
-  const handlerShowPopupMenu = () => {
-    dispatch(UIActions.togglePopupMenu());
-
-    // do the search
+  // trigger when input value changed
+  const actionOnChange = (event) => {
+    setLocationFilter(event.target.value.toLowerCase().replace(",", ""));
+    if(event.target.value.trim() === '') {
+      dispatch(staysFilterActions.setLocation(''))
+    }
   };
 
-  const handlerFormSubmit = (event) => {
-    event.preventDefault();
+  useEffect(() => {
+    locationRef.current.value = locationRedux;
+    setLocationFilter(locationRedux.toLowerCase().replace(",", ""));
+  }, [locationRedux])
 
-    // do the search
+  useEffect(() => {
+    setLocationListsFiltered(
+      locationLists.filter((item) =>
+        item.toLowerCase().replace(",", "").includes(locationFilter)
+      )
+    );
+  }, [locationFilter]);
+
+  const handleShowPopupMenu = () => {
+    dispatch(UIActions.togglePopupMenu());
+  };
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
   };
 
   // set which search filter to show
-  const handlerLocation = () => {
+  const handleLocation = () => {
     setSelectedFilter("location");
   };
 
-  const handlerGuests = () => {
+  const handleGuests = () => {
     setSelectedFilter("guests");
   };
 
@@ -41,10 +65,10 @@ const PopupMenu = () => {
       <div
         id="menu-overlay"
         className="fixed top-0 left-0 w-screen h-screen backdrop-blur-[2px] z-10"
-        onClick={handlerShowPopupMenu}
+        onClick={handleShowPopupMenu}
       />
       <form
-        onSubmit={handlerFormSubmit}
+        onSubmit={handleFormSubmit}
         className="z-20 px-3 pt-[18px] pb-6 sm:pt-[93px] bg-white min-h-[632px] sm:min-h-[500px] flex flex-col justify-between max-w-[1280px] w-full mx-auto"
       >
         <div>
@@ -55,7 +79,7 @@ const PopupMenu = () => {
             <p className="text-xs font-bold">Edit your search</p>
             <span
               className="cursor-pointer material-symbols-outlined"
-              onClick={handlerShowPopupMenu}
+              onClick={handleShowPopupMenu}
             >
               close
             </span>
@@ -68,14 +92,21 @@ const PopupMenu = () => {
                     ? "border-[#333]"
                     : "border-transparent"
                 }`}
-                onClick={handlerLocation}
+                onClick={handleLocation}
               >
                 <label htmlFor="location">LOCATION</label>
-                <Input type="text" placeholder="Add Location" name="location" />
+                <input
+                  type="text"
+                  placeholder="Add Location"
+                  name="location"
+                  onChange={actionOnChange}
+                  className="outline-none"
+                  ref={locationRef}
+                />
               </div>
               <div
                 className="border-t-[1px] sm:border-solid sm:border-x-[1px] border-[#F2F2F2]"
-                onClick={handlerGuests}
+                onClick={handleGuests}
               >
                 <div
                   className={`flex flex-col gap-1 justify-center py-[11px] px-[26px] rounded-2xl border border-solid  border-[#333] ${

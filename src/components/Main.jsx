@@ -1,42 +1,52 @@
 import React, { useState } from "react";
 import staysData from "../datas/staysData";
 import StayItem from "./StayItem";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const [filteredData, setFilteredData] = useState(staysData);
   let totalStaysShown = filteredData.length;
   if (filteredData.length > 12) totalStaysShown = "12+";
 
+  // function searchStays(query, staysData) {
+  //   const results = [];
+  //   let searchTerms = null;
+  //   if (query.includes(",")) {
+  //     searchTerms = query.trim().toLowerCase().split(",");
+  //   } else {
+  //     searchTerms = query.trim().toLowerCase().split(" ");
+  //     if(searchTerms[1]) searchTerms[1] = ` ${searchTerms[1]}`
+      
+  //   }
+
+  //   staysData.forEach((stay) => {
+  //     const cityAndCountry = `${stay.city.toLowerCase()}, ${stay.country.toLowerCase()}`;
+
+  //     if (cityAndCountry.includes(query.toLowerCase())) {
+  //       results.push(stay);
+  //     } else {
+  //       let match = true;
+  //       searchTerms.forEach((term) => {
+  //         if (!cityAndCountry.includes(term.trim())) {
+  //           match = false;
+  //         }
+  //       });
+  //       if (match) {
+  //         results.push(stay);
+  //       }
+  //     }
+  //   });
+
+  //   return results;
+  // }
+
+  const { location: locationRedux } = useSelector(state => state.staysFilter)
+  // console.log(locationRedux);
+
   function searchStays(query, staysData) {
     const results = [];
-    let searchTerms = null;
-    console.log(query.includes(","));
-    if (query.includes(",")) {
-      searchTerms = query.trim().toLowerCase().split(",");
-    } else {
-      searchTerms = query.trim().toLowerCase().split(" ");
-      if(searchTerms[1]) searchTerms[1] = ` ${searchTerms[1]}`
-      
-    }
-    // const searchTerms = query.trim().toLowerCase().split(",");
-    console.log(searchTerms);
-
     staysData.forEach((stay) => {
-      const cityAndCountry = `${stay.city.toLowerCase()}, ${stay.country.toLowerCase()}`;
 
-      if (cityAndCountry.includes(query.toLowerCase())) {
-        results.push(stay);
-      } else {
-        let match = true;
-        searchTerms.forEach((term) => {
-          if (!cityAndCountry.includes(term.trim())) {
-            match = false;
-          }
-        });
-        if (match) {
-          results.push(stay);
-        }
-      }
     });
 
     return results;
@@ -44,7 +54,6 @@ const Main = () => {
 
   const query = "helsinki finland";
   const searchResults = searchStays(query, staysData);
-  console.log(searchResults);
 
   return (
     <main className="text-[#333]">

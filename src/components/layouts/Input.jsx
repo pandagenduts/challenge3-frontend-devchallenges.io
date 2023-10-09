@@ -1,5 +1,5 @@
 const Input = (props) => {
-  const { type, placeholder, readOnly, className, actionOnClick, value, name } = props;
+  const { type, placeholder, readOnly, className, actionOnClick, actionOnChange, value, name } = props;
 
 // name & id
 
@@ -13,6 +13,7 @@ const Input = (props) => {
       readOnly={readOnly ? readOnly : false}
       className={`outline-none ${className}`}
       onClick={actionOnClick}
+      onChange={actionOnChange}
     />
   );
 };
