@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const staysFilterInit = {
   location: "",
+  doTheSearch: false,
   guests: {
     totalGuests: 0,
     adults: 0,
     children: 0,
   },
-  doTheSearch: true,
 };
 
 const staysFilterSlice = createSlice({

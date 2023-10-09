@@ -34,7 +34,7 @@ const Header = () => {
             readOnly
             placeholder="Add Guest"
             value={totalGuestsRedux === 0 ? "" : `${totalGuestsRedux} ${totalGuestsRedux === 1 ? 'guest' : 'guests'}` }
-            className="w-16 text-sm cursor-pointer"
+            className="w-[70px] text-sm cursor-pointer"
             actionOnClick={handlerShowPopupMenu}
           />
         </div>

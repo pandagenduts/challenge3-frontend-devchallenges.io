@@ -25,19 +25,19 @@ const Guests = ({ title, description }) => {
       <p>{title}</p>
       <p className="text-[#BDBDBD] mb-3">{description}</p>
       <div className="flex gap-[15px] items-center text-[#828282]">
-        <button
-          className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer"
+        <div
+          className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer flex items-center justify-center"
           onClick={handleDecreaseGuests}
         >
           -
-        </button>
+        </div>
         <span className="text-[#333] font-bold">{numberOfGuests}</span>
-        <button
-          className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer"
+        <div
+          className="w-[23px] h-[23px] outline outline-1 outline-[#828282] rounded-[4px] cursor-pointer flex items-center justify-center"
           onClick={handleAddGuests}
         >
           +
-        </button>
+        </div>
       </div>
     </div>
   );

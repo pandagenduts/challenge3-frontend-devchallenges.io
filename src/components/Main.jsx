@@ -3,21 +3,26 @@ import staysData from "../datas/staysData";
 import StayItem from "./StayItem";
 import { useSelector } from "react-redux";
 
+let init = true;
+
 const Main = () => {
   const [filteredData, setFilteredData] = useState(staysData);
   let totalStaysShown = filteredData.length;
-  if (filteredData.length > 12) totalStaysShown = "12+";
 
-  const { location: locationRedux, guests } = useSelector(state => state.staysFilter)
-  const { totalGuests: totalGuestsRedux } = guests;
+  const { location: locationRedux, guests, doTheSearch } = useSelector(state => state.staysFilter)
+  const { totalGuests: totalGuestsRedux } = guests
 
   useEffect(() => {
+    if (init) {
+      init = false;
+      return;
+    }
     const result = staysData.filter(item => {
       const cityAndCountry = `${item.city}, ${item.country}`;
       return cityAndCountry.includes(locationRedux) && totalGuestsRedux <= item.maxGuests
     })
     setFilteredData(result);
-  }, [locationRedux, totalGuestsRedux])
+  }, [doTheSearch])
 
   return (
     <main className="text-[#333]">

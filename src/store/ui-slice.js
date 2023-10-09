@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initUI = {
-  showPopupMenu: true,
+  showPopupMenu: false,
 }
 
 const UISlice = createSlice({

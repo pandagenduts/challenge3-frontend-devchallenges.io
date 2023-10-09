@@ -49,10 +49,10 @@ const PopupMenu = () => {
     dispatch(UIActions.togglePopupMenu());
   };
 
-  const handleBackdropClick = () => {};
-
   const handleFormSubmit = (event) => {
     event.preventDefault();
+    dispatch(staysFilterActions.setDoTheSearch());
+    dispatch(UIActions.togglePopupMenu());
   };
 
   // set which search filter to show
@@ -69,7 +69,7 @@ const PopupMenu = () => {
       <div
         id="menu-overlay"
         className="fixed top-0 left-0 w-screen h-screen backdrop-blur-[2px] z-10"
-        onClick={handleShowPopupMenu}
+        onClick={handleFormSubmit}
       />
       <form
         onSubmit={handleFormSubmit}
